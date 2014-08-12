@@ -44,7 +44,7 @@ cat >AdditionalLanguages.plist <<EOF
 		<array>
 			<dict>
 				<key>identifier</key>
-				<string>com.apple.xcode.lua-source</string>
+				<string>org.lua.lua-source</string>
 			</dict>
 		</array>
 		<key>id</key>
