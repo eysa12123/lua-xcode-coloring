@@ -1,17 +1,17 @@
 // Lua
 //  Lua.xclangspec v3.0.1
 
-//	Lua language specification for Xcode 1.5. */
-//	Bret Victor, 4/24/2005
+//  Lua language specification for Xcode 1.5. */
+//  Bret Victor, 4/24/2005
 
-//	Based on SubEthaEdit's Lua mode, and the built-in Xcode language specs at:
-//	/System/Library/PrivateFrameworks/DevToolsCore.framework/Versions/A/Resources/Built-in languages.pblangspec
+//  Based on SubEthaEdit's Lua mode, and the built-in Xcode language specs at:
+//  /System/Library/PrivateFrameworks/DevToolsCore.framework/Versions/A/Resources/Built-in languages.pblangspec
 
-//	Up dated to Lua 5.1 syntax by Graham Henstridge, 24/10/2006 and confirmed
+//  Up dated to Lua 5.1 syntax by Graham Henstridge, 24/10/2006 and confirmed
 //  operational with Xcode 2.4.
 
 //  Updated 1/12/07 to Xcode3 by Graham Henstridge, with a  little help from
-//  David Ewing at Apple     
+//  David Ewing at Apple
 //  Uses the new .xclangspec format, the definition of which is not available,
 //  however using various files at:
 //  /Developer/Library/PrivateFrameworks/XcodeEdit.framework/Versions/A/Resources/
@@ -33,7 +33,7 @@
  Words = (
    "and",
                 "break",
-                "do", 
+                "do",
                 "else",
                 "elseif",
                 "end",
@@ -60,7 +60,7 @@
                 "load",
                 "loadfile",
                 "loadstring",
-   "module",
+                "module",
                 "next",
                 "pairs",
                 "pcall",
@@ -77,12 +77,15 @@
                 "type",
                 "unpack",
                 "xpcall",
-   "_G",
-   "_VERSION",
-   
-   // there is now probably a better way of highlighting the following
+                "true",
+                "false",
+                "nil",
+                "_G",
+                "_VERSION",
 
-   "__add",
+// there is now probably a better way of highlighting the following
+
+                "__add",
                 "__concat",
                 "__div",
                 "__eq",
@@ -115,29 +118,30 @@
                 "coroutine.wrap",
                 "coroutine.yield",
 
-   "string",
-   "string.byte",
+                "string",
+                "string.byte",
                 "string.char",
                 "string.dump",
                 "string.find",
                 "string.format",
                 "string.gmatch",
                 "string.gsub",
-   "string.len",
+                "string.len",
                 "string.lower",
                 "string.match",
                 "string.rep",
+                "string.reverse",
                 "string.sub",
                 "string.upper",
-                
-   "table",
-   "table.concat",
-   "table.insert",
-   "table.maxn",
-   "table.remove",
-   "table.sort",
 
-   "math",
+                "table",
+                "table.concat",
+                "table.insert",
+                "table.maxn",
+                "table.remove",
+                "table.sort",
+
+                "math",
                 "math.abs",
                 "math.acos",
                 "math.asin",
@@ -167,10 +171,10 @@
                 "math.sinh",
                 "math.sqrt",
                 "math.tan",
-     "math.tanh",
+                "math.tanh",
 
-     "io",
-   "io.close",
+                "io",
+                "io.close",
                 "io.flush",
                 "io.input",
                 "io.lines",
@@ -183,15 +187,15 @@
                 "io.write",
                 
                 "file:close",
-     "file:flush",
-     "file:lines",
-     "file:read",
-     "file:seek",
-     "file:setvbuf",
-     "file:write",
+                "file:flush",
+                "file:lines",
+                "file:read",
+                "file:seek",
+                "file:setvbuf",
+                "file:write",
 
-     "os",
-   "os.clock",
+                "os",
+                "os.clock",
                 "os.date",
                 "os.difftime",
                 "os.execute",
@@ -220,7 +224,7 @@
                 "debug.traceback",
      );
      Type = "xcode.syntax.keyword";
- AltType = "xcode.syntax.identifier";    // non-keywords are identifiers
+     AltType = "xcode.syntax.identifier";    // non-keywords are identifiers
  };
  },
         
@@ -230,7 +234,7 @@
      Words = (
          "..",
          ".",
-                ":",
+         ":",
          );
      Type = "xcode.syntax.plain";
    };
@@ -282,9 +286,9 @@
         "xcode.lang.string.lua5",
         "xcode.lang.character",
         "xcode.lang.lua.identifier",
-                "xcode.lang.number",
+        "xcode.lang.number",
         "xcode.lang.lau.interestingOperators",
-            );
+      );
   };
 },
 
@@ -295,13 +299,14 @@
         "xcode.lang.lua.comment",
         "xcode.lang.lua.comment.singleline",
         "xcode.lang.string",
-                "xcode.lang.string.lua0",
+        "xcode.lang.string.lua0",
         "xcode.lang.string.lua1",
         "xcode.lang.string.lua2",
         "xcode.lang.string.lua3",
         "xcode.lang.string.lua4",
         "xcode.lang.string.lua5",
         "xcode.lang.character",
+        "xcode.lang.lua.local.declarator",
         "xcode.lang.lua.module.declarator",
         "xcode.lang.lua.class.declarator",
         "xcode.lang.lua.function.declarator",
@@ -392,7 +397,19 @@
     Type = "xcode.syntax.name.partial";
   };
 },
-  
+
+{
+    Identifier = "xcode.lang.lua.local.declarator";
+    Syntax = {
+        Tokenizer = "xcode.lang.lua.lexer";
+        Rules = (
+                "local",
+                "xcode.lang.lua.identifier",
+        );
+        Type = "xcode.syntax.name.partial";
+    };
+},
+
 {
   Identifier = "xcode.lang.lua.class";
   Syntax = {
@@ -505,6 +522,7 @@
         "xcode.lang.lua.block.while",
         "xcode.lang.lua.block.repeat",
         "xcode.lang.lua.block.for",
+        "xcode.lang.lua.block.do",
         "xcode.lang.lua.bracketexpr",
         "xcode.lang.lua.parenexpr",
         );
@@ -525,6 +543,7 @@
         "xcode.lang.lua.block.while",
         "xcode.lang.lua.block.repeat",
         "xcode.lang.lua.block.for",
+        "xcode.lang.lua.block.do",
         "xcode.lang.lua.bracketexpr",
         "xcode.lang.lua.parenexpr",
         );
@@ -545,6 +564,7 @@
         "xcode.lang.lua.block.if",
         "xcode.lang.lua.block.repeat",
         "xcode.lang.lua.block.for",
+        "xcode.lang.lua.block.do",
         "xcode.lang.lua.bracketexpr",
         "xcode.lang.lua.parenexpr",
         );
@@ -565,6 +585,7 @@
         "xcode.lang.lua.block.if",
         "xcode.lang.lua.block.while",
         "xcode.lang.lua.block.for",
+        "xcode.lang.lua.block.do",
         "xcode.lang.lua.bracketexpr",
         "xcode.lang.lua.parenexpr",
         );
@@ -645,19 +666,4 @@
     Type = "xcode.syntax.comment";
   };
 },
-        {
-  Identifier = "xcode.lang.lua.comment1";
-  Syntax = {
-    Start = "--[=[";
-    End = "]=]";
-    Foldable = YES;
-    IncludeRules = ( 
-                "xcode.lang.url", 
-                "xcode.lang.url.mail", 
-                "xcode.lang.comment.mark"
-            );
-    Type = "xcode.syntax.comment";
-  };
-},
-
 )
